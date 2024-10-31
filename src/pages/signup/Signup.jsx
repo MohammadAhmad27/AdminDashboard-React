@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import "./login.scss"
-import { signInWithEmailAndPassword } from "firebase/auth";
+import "./signup.scss"
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../../firebase';
 import { useNavigate } from 'react-router-dom';
 
@@ -8,11 +8,11 @@ export default function Login() {
     const [error, setError] = useState(false);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const navigate = useNavigate();
+    const navigate= useNavigate();
 
-    const handleLogin = (e) => {
+    const handleSignup = (e) => {
         e.preventDefault();
-        signInWithEmailAndPassword(auth, email, password)
+        createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 // Signed up 
                 const user = userCredential.user;
@@ -29,10 +29,9 @@ export default function Login() {
             });
     };
 
-
     return (
-        <div className="login">
-            <form onSubmit={handleLogin}>
+        <div className="signup">
+            <form onSubmit={handleSignup}>
                 <input
                     type="email"
                     placeholder="email"
@@ -43,7 +42,7 @@ export default function Login() {
                     placeholder="password"
                     onChange={(e) => setPassword(e.target.value)}
                 />
-                <button type="submit">Login</button>
+                <button type="submit">Signup</button>
                 {error && <span>Wrong credentials!</span>}
             </form>
         </div>
