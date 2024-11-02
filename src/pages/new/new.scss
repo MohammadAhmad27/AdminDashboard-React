@@ -60,19 +60,23 @@
             border-bottom: 1px solid;
           }
         }
-     
 
-      button {
-        width: 150px;
-        padding: 10px;
-        background-color: teal;
-        color: white;
-        border: none;
-        font-weight: bold;
-        border-radius: 12px;
-        cursor: pointer;
+        button {
+          width: 150px;
+          padding: 10px;
+          background-color: teal;
+          color: white;
+          border: none;
+          font-weight: bold;
+          border-radius: 12px;
+          cursor: pointer;
+
+          &:disabled {
+            background-color: rgba(3, 92, 92, 0.322);
+            cursor: not-allowed;
+          }
+        }
       }
-    }
     }
   }
 }
