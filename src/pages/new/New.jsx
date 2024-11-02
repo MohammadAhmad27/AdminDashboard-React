@@ -7,12 +7,13 @@ import { collection, addDoc, serverTimestamp, doc, setDoc } from "firebase/fires
 import { auth, db, storage } from "../../firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-
+import { useNavigate } from "react-router-dom";
 
 const New = ({ inputs, title }) => {
     const [file, setFile] = useState("");
     const [data, setData] = useState({});
     const [per, setPer] = useState(null);
+    const navigate = useNavigate();
 
 
     useEffect(() => {
@@ -72,6 +73,7 @@ const New = ({ inputs, title }) => {
                 ...data,
                 timeStamp: serverTimestamp()
             });
+            navigate(-1);
         } catch (error) {
             console.error("Error adding document: ", error);
         }

@@ -20,18 +20,18 @@ export const userColumns = [
     {
         field: "email",
         headerName: "Email",
-        width: 230,
+        width: 180,
     },
 
     {
-        field: "age",
-        headerName: "Age",
-        width: 100,
+        field: "address",
+        headerName: "Address",
+        width: 180,
     },
     {
-        field: "status",
-        headerName: "Status",
-        width: 160,
+        field: "country",
+        headerName: "Country",
+        width: 180,
         renderCell: (params) => {
             return (
                 <div className={`cellWithStatus ${params.row.status}`}>
@@ -41,6 +41,7 @@ export const userColumns = [
         },
     },
 ];
+
 
 //temporary data
 export const userRows = [
