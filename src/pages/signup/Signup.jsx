@@ -1,14 +1,16 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import "./signup.scss"
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../../firebase';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthContext';
 
 export default function Login() {
+    const { dispatch } = useContext(AuthContext);
     const [error, setError] = useState(false);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const navigate= useNavigate();
+    const navigate = useNavigate();
 
     const handleSignup = (e) => {
         e.preventDefault();
@@ -16,16 +18,15 @@ export default function Login() {
             .then((userCredential) => {
                 // Signed up 
                 const user = userCredential.user;
-                console.log(user);
+                dispatch({ type: 'LOGIN', payload: user });
                 navigate('/');
-                // ...
+                setError(false);
             })
             .catch((error) => {
+                setError(true);
                 const errorCode = error.code;
                 const errorMessage = error.message;
-                setError(true);
                 console.log(errorCode, errorMessage);
-                // ..
             });
     };
 
@@ -43,7 +44,10 @@ export default function Login() {
                     onChange={(e) => setPassword(e.target.value)}
                 />
                 <button type="submit">Signup</button>
-                {error && <span>Wrong credentials!</span>}
+                <div className='account'>Already have an account?
+                    <span className='span' onClick={() => navigate('/login')}>Login</span>
+                </div>
+                {error && <span className='error'>Wrong credentials!</span>}
             </form>
         </div>
     )
